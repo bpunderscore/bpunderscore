@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BP Underscore Node Styles</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: a review sheet. Each style is the same five-node graph (the hero) drawn with a different treatment, so only the look changes. Nodes are HTML over an SVG wire layer. */
+:root {
+  --ground: #0b1118;
+  --text: #e7ecf2;
+  --dim: #9fb0c0;
+  --line: #2a3846;
+  --bar: #22303d;
+  --font: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
+  color-scheme: dark;
+}
+body { background: var(--ground); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.5; }
+.page { max-width: 1160px; margin: 0 auto; padding-block: 48px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.08; letter-spacing: -.02em; margin: 0 0 12px; text-wrap: balance; }
+.lede { color: var(--dim); max-width: 64ch; margin: 0; }
+.style { margin-top: 56px; display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 28px; align-items: start; }
+.style h2 { font-size: 22px; margin: 0 0 6px; display: flex; gap: 10px; align-items: baseline; }
+.style h2 b { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; background: var(--bar); font-size: 15px; }
+.style p { margin: 0 0 8px; color: var(--dim); }
+.style ul { margin: 0; padding-left: 18px; color: var(--dim); }
+.stage { width: fit-content; max-width: 100%; overflow-x: auto; border-radius: 12px; border: 1.5px solid var(--line); }
+@media (max-width: 860px) { .style { grid-template-columns: minmax(0, 1fr); } }
+.foot { margin-top: 56px; color: var(--dim); max-width: 64ch; }
+
+/* ---- graph (shared) ---- */
+.g { position: relative; width: 560px; height: 360px; overflow: hidden; }
+.g svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.g path { fill: none; stroke-linecap: round; }
+.n { position: absolute; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; }
+.n.drag { cursor: grabbing; z-index: 5; }
+.h { display: flex; align-items: center; gap: 8px; }
+.r { position: relative; display: flex; justify-content: space-between; align-items: center; height: 26px; }
+.pin { position: absolute; top: 50%; width: 11px; height: 11px; border-radius: 50%; background: var(--c); transform: translate(-50%, -50%); }
+.pin.in { left: 0; }
+.pin.out { left: 100%; }
+
+/* 1 Unreal Blueprint */
+.s1 { background-color: #1a1a1a; background-image: linear-gradient(#232323 1px, transparent 1px), linear-gradient(90deg, #232323 1px, transparent 1px), linear-gradient(#2a2a2a 1px, transparent 1px), linear-gradient(90deg, #2a2a2a 1px, transparent 1px); background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px; font: 12px/1 'Inter', sans-serif; }
+.s1 path { stroke-width: 3; }
+.s1 .n { background: linear-gradient(#262626, #1c1c1c); border-radius: 7px; box-shadow: 0 0 0 1px #000, 0 8px 18px rgba(0, 0, 0, .6); color: #d6d6d6; padding-bottom: 6px; }
+.s1 .h { height: 26px; padding: 0 10px; border-radius: 6px 6px 0 0; background: linear-gradient(90deg, var(--h), rgba(0, 0, 0, 0) 130%), #1c1c1c; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18); color: #fff; font-weight: 600; font-size: 12.5px; text-shadow: 0 1px 2px #000; }
+.s1 .ic { width: 12px; height: 12px; border-radius: 3px; background: rgba(255, 255, 255, .85); box-shadow: 0 1px 2px #0008; }
+.s1 .r { padding: 0 12px; }
+.s1 .pin { box-shadow: 0 0 0 2px #1c1c1c; }
+.s1 .pin.x { width: 13px; height: 13px; border-radius: 0; background: #fff; clip-path: polygon(0 0, 100% 50%, 0 100%); box-shadow: none; }
+
+/* 2 Glass */
+.s2 { background: linear-gradient(rgba(16, 24, 32, .5), rgba(16, 24, 32, .72)), url(../img/header.jpg) 30% 40% / 150% auto; font: 12.5px/1 var(--font); }
+.s2 path { stroke-width: 2.5; filter: drop-shadow(0 0 5px currentColor); }
+.s2 .n { background: rgba(255, 255, 255, .08); -webkit-backdrop-filter: blur(14px) saturate(150%); backdrop-filter: blur(14px) saturate(150%); border: 1px solid rgba(255, 255, 255, .2); border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .22); color: rgba(255, 255, 255, .78); padding-bottom: 10px; }
+.s2 .h { padding: 12px 14px 6px; color: #fff; font-weight: 600; font-size: 13.5px; }
+.s2 .ic { display: none; }
+.s2 .r { padding: 0 14px; }
+.s2 .pin { box-shadow: 0 0 0 3px rgba(255, 255, 255, .14), 0 0 14px var(--c); }
+
+/* 3 Technical drawing */
+.s3 { background-color: #0048b1; background-image: linear-gradient(rgba(255, 255, 255, .4) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .4) 1px, transparent 1px), linear-gradient(rgba(255, 255, 255, .15) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .15) 1px, transparent 1px); background-size: 112px 112px, 112px 112px, 28px 28px, 28px 28px; font: 11.5px/1 'IBM Plex Mono', monospace; }
+.s3 path { stroke: #fff; stroke-width: 1.6; }
+.s3 .n { background: #0048b1; border: 1.5px solid #fff; border-radius: 2px; color: #fff; padding-bottom: 4px; box-shadow: 4px 4px 0 rgba(0, 20, 70, .5); }
+.s3 .h { height: 26px; padding: 0 10px; gap: 4px; white-space: nowrap; border-bottom: 1.5px solid #fff; font-weight: 500; font-size: 12px; justify-content: space-between; }
+.s3 .h::after { content: attr(data-ref); opacity: .6; font-size: 9px; }
+.s3 .ic { display: none; }
+.s3 .r { padding: 0 12px; }
+.s3 .pin { width: 9px; height: 9px; border-radius: 0; background: #0048b1; border: 1.5px solid #fff; }
+.s3 .pin.x { background: #fff; }
+
+/* 4 Soft cards */
+.s4 { background: radial-gradient(circle at 70% 20%, #151b26, #0a0d12 70%); font: 12px/1 'Inter', sans-serif; }
+.s4 path { stroke-width: 2.5; }
+.s4 .n { background: linear-gradient(#171b22, #12151b); border: 1px solid #252c37; border-radius: 12px; box-shadow: 0 10px 28px rgba(0, 0, 0, .55); color: #8e9aab; padding-bottom: 8px; }
+.s4 .h { padding: 11px 13px; border-bottom: 1px solid #1f2630; color: #eef2f7; font-weight: 600; font-size: 13px; }
+.s4 .ic { width: 20px; height: 20px; border-radius: 6px; background: var(--h); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .25); }
+.s4 .r { padding: 0 13px; height: 28px; }
+.s4 .pin { width: 10px; height: 10px; box-shadow: 0 0 0 3px #12151b; }
+
+/* 5 Light paper */
+.s5 { background-color: #eef1f6; background-image: radial-gradient(#c3cbd8 1.2px, transparent 1.5px); background-size: 20px 20px; font: 12px/1 'Inter', sans-serif; }
+.s5 path { stroke-width: 2.5; }
+.s5 .n { background: #fff; border: 1px solid #dde3ec; border-radius: 10px; box-shadow: 0 6px 18px rgba(30, 45, 70, .12); color: #5a6a80; padding-bottom: 8px; }
+.s5 .h { padding: 10px 13px; border-radius: 9px 9px 0 0; background: color-mix(in srgb, var(--h) 16%, #fff); color: #16212d; font-weight: 600; font-size: 13px; }
+.s5 .ic { width: 9px; height: 9px; border-radius: 50%; background: var(--h); }
+.s5 .r { padding: 0 13px; height: 28px; }
+.s5 .pin { box-shadow: 0 0 0 3px #fff, 0 1px 4px rgba(30, 45, 70, .35); }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <h1>Node styles</h1>
+  <p class="lede">Five looks for the nodes, all drawn on the same hero graph so the only difference is the style. Drag any node, and the wires follow. Whichever you pick would apply to the hero and the contact graph.</p>
+
+  <section class="style">
+    <div>
+      <h2><b>1</b> Unreal Blueprint</h2>
+      <p>The editor your clients already know. Colored gradient headers by node type, triangle pins for execution flow, round pins for data.</p>
+      <ul><li>Reads instantly as game tech</li><li>Busiest of the five</li></ul>
+    </div>
+    <div class="stage"><div class="g s1" data-wire="solid"></div></div>
+  </section>
+
+  <section class="style">
+    <div>
+      <h2><b>2</b> Glass</h2>
+      <p>Frosted panels over the headset photo, soft glowing pins and wires.</p>
+      <ul><li>Most premium and atmospheric</li><li>Needs a photo or gradient behind it, so it suits the hero best</li></ul>
+    </div>
+    <div class="stage"><div class="g s2" data-wire="solid"></div></div>
+  </section>
+
+  <section class="style">
+    <div>
+      <h2><b>3</b> Technical drawing</h2>
+      <p>Outlined nodes on the blue blueprint grid, mono labels, square pins and a hard offset shadow.</p>
+      <ul><li>Matches the new About grid</li><li>Wires are thin white, so the colored pins carry the meaning less</li></ul>
+    </div>
+    <div class="stage"><div class="g s3" data-wire="solid"></div></div>
+  </section>
+
+  <section class="style">
+    <div>
+      <h2><b>4</b> Soft cards</h2>
+      <p>Smooth dark cards with an icon chip in the header, divider lines, ring pins and wires that fade from one pin color to the next.</p>
+      <ul><li>Cleanest and most modern</li><li>Closest to today's design tools</li></ul>
+    </div>
+    <div class="stage"><div class="g s4" data-wire="gradient"></div></div>
+  </section>
+
+  <section class="style">
+    <div>
+      <h2><b>5</b> Light paper</h2>
+      <p>White cards with tinted headers on a pale dotted grid. A bright counterpoint to the dark hero.</p>
+      <ul><li>Would make the contact section a light band</li><li>Breaks from the dark theme, so a bigger change</li></ul>
+    </div>
+    <div class="stage"><div class="g s5" data-wire="solid"></div></div>
+  </section>
+
+  <p class="foot">Reply with a number, or mix them, for example "4 for the nodes and 2 for the hero background".</p>
+</div>
+
+<script>
+var C = { teal: '#4fb3a9', mag: '#c96ba0', gold: '#d9a94a', white: '#e7ecf2' };
+var NODES = [
+  { id: 'scene', x: 14, y: 24, w: 150, t: 'Scene', ref: 'A-01', h: ['#2d79c7', '#4fb3a9'], rows: [{ o: ['Meshes', C.teal] }, { o: ['Materials', C.mag] }] },
+  { id: 'perf', x: 14, y: 232, w: 150, t: 'Perf budget', ref: 'A-02', h: ['#2e8f55', '#d9a94a'], rows: [{ o: ['Limits', C.gold] }] },
+  { id: 'pipe', x: 206, y: 112, w: 144, t: 'Pipeline tool', ref: 'B-01', h: ['#c2571a', '#4a8ff0'], rows: [{ i: ['Assets', C.teal], o: ['Build', C.white] }, { i: ['Material', C.mag] }, { i: ['Limits', C.gold] }] },
+  { id: 'engine', x: 392, y: 92, w: 152, t: 'Unreal / Unity', ref: 'C-01', h: ['#7a3fb5', '#8b6cf0'], rows: [{ i: ['Build', C.white], o: ['Output', C.white] }, { plain: 'Frame time' }] }
+];
+var LINKS = [['scene', 0, 'pipe', 0], ['scene', 1, 'pipe', 1], ['perf', 0, 'pipe', 2], ['pipe', 0, 'engine', 0], ['engine', 0, null, 0]];
+var NS = 'http://www.w3.org/2000/svg';
+
+function build(g) {
+  var cls = g.className.split(' ')[1], idx = +cls.slice(1), gradient = g.dataset.wire === 'gradient';
+  var svg = document.createElementNS(NS, 'svg'), defs = document.createElementNS(NS, 'defs');
+  svg.appendChild(defs); g.appendChild(svg);
+  var pins = {}, els = {};
+  NODES.forEach(function (n) {
+    var d = document.createElement('div');
+    d.className = 'n'; d.style.left = n.x + 'px'; d.style.top = n.y + 'px'; d.style.width = n.w + 'px';
+    d.style.setProperty('--h', idx === 1 ? n.h[0] : n.h[1]);
+    var h = document.createElement('div'); h.className = 'h'; h.dataset.ref = n.ref;
+    h.innerHTML = '<i class="ic"></i><span>' + n.t + '</span>'; d.appendChild(h);
+    n.rows.forEach(function (row, ri) {
+      var r = document.createElement('div'); r.className = 'r';
+      var a = document.createElement('span'), b = document.createElement('span');
+      if (row.plain) a.textContent = row.plain;
+      if (row.i) { a.textContent = row.i[0]; pins[n.id + ':' + ri + ':i'] = pin(r, 'in', row.i[1]); }
+      if (row.o) { b.textContent = row.o[0]; pins[n.id + ':' + ri + ':o'] = pin(r, 'out', row.o[1]); }
+      r.insertBefore(a, r.firstChild); r.insertBefore(b, r.children[1]);
+      d.appendChild(r);
+    });
+    g.appendChild(d); els[n.id] = { el: d, n: n };
+  });
+  function pin(row, dir, color) {
+    var p = document.createElement('i');
+    var exec = color === C.white;
+    if (exec && idx === 5) color = '#8a99ae'; // white vanishes on the light paper
+    p.className = 'pin ' + dir + (exec && idx === 1 ? ' x' : ''); p.style.setProperty('--c', color);
+    p.dataset.c = color; row.appendChild(p); return p;
+  }
+  var paths = LINKS.map(function (l, i) {
+    var p = document.createElementNS(NS, 'path'); svg.appendChild(p);
+    var grad = null;
+    if (gradient) { grad = document.createElementNS(NS, 'linearGradient'); grad.id = 'gr' + idx + '_' + i; grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+      grad.innerHTML = '<stop offset="0"/><stop offset="1"/>'; defs.appendChild(grad); p.setAttribute('stroke', 'url(#' + grad.id + ')'); }
+    return { p: p, l: l, grad: grad };
+  });
+  function center(el) {
+    var r = el.getBoundingClientRect(), b = g.getBoundingClientRect();
+    return { x: r.left + r.width / 2 - b.left, y: r.top + r.height / 2 - b.top };
+  }
+  function draw() {
+    paths.forEach(function (w) {
+      var from = pins[w.l[0] + ':' + w.l[1] + ':o'], to = w.l[2] ? pins[w.l[2] + ':' + w.l[3] + ':i'] : null;
+      var a = center(from), color = from.dataset.c, b;
+      b = to ? center(to) : { x: g.clientWidth + 60, y: a.y };
+      var dx = to ? Math.max(40, Math.abs(b.x - a.x) / 2) : 0;
+      w.p.setAttribute('d', 'M' + a.x + ' ' + a.y + ' C' + (a.x + dx) + ' ' + a.y + ' ' + (b.x - dx) + ' ' + b.y + ' ' + b.x + ' ' + b.y);
+      w.p.style.color = color;
+      if (w.grad) {
+        var s = w.grad.children, c2 = to ? to.dataset.c : color;
+        w.grad.setAttribute('x1', a.x); w.grad.setAttribute('y1', a.y); w.grad.setAttribute('x2', b.x); w.grad.setAttribute('y2', b.y);
+        s[0].setAttribute('stop-color', color); s[1].setAttribute('stop-color', c2);
+      } else if (idx !== 3) w.p.setAttribute('stroke', color);
+    });
+  }
+  Object.keys(els).forEach(function (k) {
+    var el = els[k].el;
+    el.addEventListener('pointerdown', function (e) {
+      var sx = e.clientX, sy = e.clientY, ox = el.offsetLeft, oy = el.offsetTop;
+      el.classList.add('drag'); el.setPointerCapture(e.pointerId);
+      function move(ev) {
+        el.style.left = Math.max(0, Math.min(g.clientWidth - el.offsetWidth, ox + ev.clientX - sx)) + 'px';
+        el.style.top = Math.max(0, Math.min(g.clientHeight - el.offsetHeight, oy + ev.clientY - sy)) + 'px';
+        draw();
+      }
+      function up() { el.classList.remove('drag'); el.removeEventListener('pointermove', move); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up); }
+      el.addEventListener('pointermove', move); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+    });
+  });
+  draw();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+  addEventListener('load', draw);
+}
+document.querySelectorAll('.g').forEach(build);
+</script>
+</body>
+</html>

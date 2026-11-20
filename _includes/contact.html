@@ -6,27 +6,27 @@
                 <path data-w="start:240,150>reach:0,56" stroke="#4fb3a9"/>
                 <path data-w="start:240,195>reach:0,101" stroke="#c96ba0"/>
                 <path data-w="start:240,240>reach:0,146" stroke="#d9a94a"/>
-                <path data-w="reach:240,101>out2:0,0" d="M770 291 C1585 291 1585 200 2400 200" stroke="#8c8c8c"/>
+                <path data-w="reach:240,101>out2:0,0" d="M770 200 L2400 200" stroke="#8c8c8c"/>
             </g>
             <g class="node" data-n="start" transform="translate(130 40)">
                 <rect width="240" height="262" rx="14"/><path class="bar" d="M0 8a8 8 0 0 1 8-8h224a8 8 0 0 1 8 8v18H0z"/>
                 <text x="14" y="18" class="t">Start a project</text>
                 <circle cx="0" cy="56" r="5.5" fill="#e7ecf2"/><text x="14" y="60" class="p">Brief</text>
                 <text x="14" y="90" class="p lg">Tell us about your project and we</text><text x="14" y="108" class="p lg">will reply by email.</text>
-                <circle cx="240" cy="150" r="5.5" fill="#4fb3a9"/><text x="226" y="155" class="t" text-anchor="end">contact@bpunderscore.com</text>
+                <circle cx="240" cy="150" r="5.5" fill="#4fb3a9"/><text x="226" y="155" class="t" text-anchor="end">{{ site.email }}</text>
                 <circle cx="240" cy="195" r="5.5" fill="#c96ba0"/><text x="226" y="200" class="t" text-anchor="end">X (Twitter)</text>
                 <circle cx="240" cy="240" r="5.5" fill="#d9a94a"/><text x="226" y="245" class="t" text-anchor="end">Instagram</text>
             </g>
-            <g class="node" data-n="reach" transform="translate(530 190)">
+            <g class="node" data-n="reach" transform="translate(530 99)">
                 <rect width="240" height="176" rx="14"/><path class="bar" d="M0 8a8 8 0 0 1 8-8h224a8 8 0 0 1 8 8v18H0z"/>
                 <text x="14" y="18" class="t">Get in touch</text>
                 <circle cx="0" cy="56" r="5.5" fill="#4fb3a9"/>
-                <a href="mailto:contact@bpunderscore.com"><text x="16" y="62" class="big">Email us</text></a>
+                <a href="mailto:{{ site.email }}"><text x="16" y="62" class="big">Email us</text></a>
                 <circle cx="0" cy="101" r="5.5" fill="#c96ba0"/>
-                <a href="https://x.com/BpUnderscore"><text x="16" y="107" class="big">Follow on X</text></a>
+                <a href="{{ site.x_url }}"><text x="16" y="107" class="big">Follow on X</text></a>
                 <circle cx="0" cy="146" r="5.5" fill="#d9a94a"/>
                 <circle cx="240" cy="101" r="5.5" fill="#8c8c8c"/>
-                <a href="https://www.instagram.com/bp_underscore/"><text x="16" y="152" class="big">Follow on Instagram</text></a>
+                <a href="{{ site.instagram_url }}"><text x="16" y="152" class="big">Follow on Instagram</text></a>
             </g>
             <g class="node out" data-n="out2" transform="translate(2400 200)" pointer-events="none"><rect width="1" height="1"/></g>
         </svg>
@@ -34,9 +34,9 @@
             <div class="bar">Start a project</div>
             <p>Tell us about your project and we will reply by email as soon as we can.</p>
             <ul>
-                <li style="--c:#4fb3a9"><a class="mail" href="mailto:contact@bpunderscore.com">contact@bpunderscore.com</a></li>
-                <li style="--c:#c96ba0"><a href="https://x.com/BpUnderscore">X (Twitter)</a></li>
-                <li style="--c:#d9a94a"><a href="https://www.instagram.com/bp_underscore/">Instagram</a></li>
+                <li style="--c:#4fb3a9"><a class="mail" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+                <li style="--c:#c96ba0"><a href="{{ site.x_url }}">X (Twitter)</a></li>
+                <li style="--c:#d9a94a"><a href="{{ site.instagram_url }}">Instagram</a></li>
             </ul>
         </div>
     </div>

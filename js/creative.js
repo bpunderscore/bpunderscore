@@ -19,7 +19,7 @@
     // Highlight the top nav as scrolling occurs
     $('body').scrollspy({
         target: '.navbar-fixed-top',
-        offset: 51
+        offset: 69 // just past the 68px scroll offset, so the clicked link highlights
     })
 
     // Closes the Responsive Menu on Menu Item Click
@@ -96,7 +96,7 @@
 
         $.each(nodes, function(name, n) {
             n.g.addEventListener('pointerdown', function(e) {
-                if (e.button) return;
+                if (e.button || e.pointerType === 'touch') return; // touch keeps scrolling the page
                 var c = toSvg(e), sx = e.clientX, sy = e.clientY, ox = c.x - n.x, oy = c.y - n.y, moved = false;
                 function move(ev) {
                     if (!moved && Math.abs(ev.clientX - sx) + Math.abs(ev.clientY - sy) < 5) return;

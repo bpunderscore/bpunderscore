@@ -27,7 +27,7 @@ $pin-gold: #d9a94a;
     display: flex;
     align-items: center;
     padding: 110px 24px 70px;
-    overflow-x: clip; // the output wire runs off the right edge
+    overflow: hidden; // the output wire runs off the right edge
     color: $text;
     text-align: left;
     background: linear-gradient(rgba($ink, .5), rgba($ink, .72)), url('../img/header.jpg') center / cover;
@@ -60,7 +60,7 @@ $pin-gold: #d9a94a;
         font-size: 19px;
         line-height: 1.55;
         font-weight: 400;
-        color: $text-dim;
+        color: #c9d4e0;
     }
 
     .btn-primary {
@@ -126,14 +126,13 @@ $pin-gold: #d9a94a;
 .contact-graph {
     .node {
         cursor: grab;
-        touch-action: none;
         filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .35));
         &.drag { cursor: grabbing; }
         &:hover rect:first-child { stroke: rgba(white, .65); }
         rect { fill: rgba(white, .13); stroke: rgba(white, .38); stroke-width: 1.2; }
         &.out rect { fill: none; stroke: none; }
         .bar { fill: none; }
-        circle { stroke: rgba(white, .2); stroke-width: 6px; paint-order: stroke; filter: drop-shadow(0 0 5px var(--w, white)) drop-shadow(0 0 10px var(--w, white)); }
+        circle { stroke: var(--w, white); stroke-opacity: .35; stroke-width: 8px; paint-order: stroke; } // a ring, not a filter: cheaper to redraw while dragging
         text { font-family: inherit; user-select: none; -webkit-user-select: none; }
         .t { fill: white; font-size: 14px; font-weight: 600; }
         .p { fill: rgba(white, .75); font-size: 13px; }
