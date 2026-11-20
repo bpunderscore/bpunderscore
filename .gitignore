@@ -3,3 +3,5 @@ _site/
 img/portfolio/lib/
 .jekyll-cache/
 resource/
+.gems/
+.bundle/
