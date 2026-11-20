@@ -21,5 +21,6 @@ Changes to `_config.yml` need a restart of `jekyll serve`.
 - Styles for the hero, nav, services and contact: `_sass/_hero.scss`
 - Dragging, wire drawing and frosted panels: `js/creative.js`
 - Design mockups (not published): `_mockups/`
+- Documentation (not published): `_docs/ARCHITECTURE.md` (technology and structure), `_docs/DEVLOG.md` (dev log and to-do), `_docs/TROUBLESHOOTING.md` (problems and fixes)
 
 The theme is licensed under Apache 2.0, see `LICENCE`.
