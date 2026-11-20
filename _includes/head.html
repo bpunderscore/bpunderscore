@@ -23,4 +23,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/main.css" type="text/css">
 
+    {% if jekyll.environment == "production" and site.cloudflare_analytics_token %}
+    <!-- Cloudflare Web Analytics -->
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ site.cloudflare_analytics_token }}"}'></script>
+    {% endif %}
 </head>
